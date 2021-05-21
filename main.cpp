@@ -3,10 +3,21 @@
 
 using namespace std;
 
+string string_runner (char *ponteiro, string word, int word_length, int controle){
+  for (int i = 0; i < word_length; i++){
+    if(controle == 0){
+      ponteiro[i] = word[i];
+    }else{
+      word += ponteiro[i];
+    }
+  }
+  return word;
+}
+
 int codificador(char *word, char *new_word, int word_length, char letter, char new_letter){
   int exchanges = 0;
   for(int i = 0; i < word_length; i++){
-    if ((word[i] != letter) || (word[i] != toupper(letter))){
+    if ((word[i] != letter) && (word[i] != toupper(letter))){
       new_word[i] = word[i];
     }else{
       new_word[i] = new_letter;
@@ -18,7 +29,7 @@ int codificador(char *word, char *new_word, int word_length, char letter, char n
 }
 
 int main() {
-  string word;
+  string word, new_word;
   int sizeofString, exchanges;
   char letter, new_letter, *p, *pNew;
 
@@ -30,20 +41,16 @@ int main() {
 
   char vetor_word[sizeofString], vetor_newWord[sizeofString];
 
-  for (int i = 0; i < sizeofString; i++){
-    vetor_word[i] = word[i];
-  }
-
   p = &vetor_word[0];
   pNew = &vetor_newWord[0];
 
-  exchanges = codificador(p, pNew, sizeofString, letter, new_letter);
-  
-  for (int i = 0; i < sizeofString; i++){
-    cout << vetor_newWord[i];
-  }
+  string_runner(p, word, sizeofString, 0);
 
-  cout << "\n" << word << endl;
+  exchanges = codificador(p, pNew, sizeofString, letter, new_letter);
+  new_word = string_runner(pNew, new_word, sizeofString, 1);
+
+  cout << new_word << endl;
+  cout << word << endl;
   cout << exchanges << endl;
 
   
