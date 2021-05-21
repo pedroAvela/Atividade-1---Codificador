@@ -3,14 +3,14 @@
 
 using namespace std;
 
-int codificador(string *word, string *new_word, int word_length, char letter){
+int codificador(string *word, string *new_word, int word_length, char letter, char new_letter){
   string old_word = *word, codified_word = *new_word;
   int exchanges = 0;
   for(int i = 0; i < word_length; i++){
     if (old_word[i] != letter){
       codified_word += old_word[i];
     }else{
-      codified_word += 'x';
+      codified_word += new_letter;
       exchanges += 1;
     }
   }
@@ -22,19 +22,23 @@ int codificador(string *word, string *new_word, int word_length, char letter){
 }
 
 int main() {
-  string palavra = "internet", nova_palavra, *p, *pNew;
-  int n = palavra.length(), exchanges;
-  char letra = 'e';
+  string word, new_word, *p, *pNew;
+  int tamanho, exchanges;
+  char letter, new_letter;
 
-  p = &palavra;
-  pNew = &nova_palavra;
+  cin >> word;
+  cin >> letter;
+  cin >> new_letter;
 
-  cout << palavra << endl;
+  tamanho = word.length();
 
-  exchanges = codificador(p, pNew, n, letra);
+  p = &word;
+  pNew = &new_word;
+
+  exchanges = codificador(p, pNew, tamanho, letter, new_letter);
  
-  cout << nova_palavra << endl;
-
+  cout << new_word << endl;
+  cout << word << endl;
   cout << exchanges << endl;
   
 }
