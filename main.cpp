@@ -1,35 +1,40 @@
 #include <iostream>
 #include <string>
-#include <vector>
 
 using namespace std;
 
-void codificador(string *word, char letter){
-  string old_word = *word;
-  for(int i = 0; i < old_word.length(); i++){
-    if (old_word[i] == letter){
-      old_word[i] = 'x';
+int codificador(string *word, string *new_word, int word_length, char letter){
+  string old_word = *word, codified_word = *new_word;
+  int exchanges = 0;
+  for(int i = 0; i < word_length; i++){
+    if (old_word[i] != letter){
+      codified_word += old_word[i];
+    }else{
+      codified_word += 'x';
+      exchanges += 1;
     }
   }
 
-  *word = old_word;
+  *new_word = codified_word;
 
-  return;
+  return exchanges;
   
 }
 
 int main() {
-  string palavra = "internet", *p;
-  int n = palavra.length();
+  string palavra = "internet", nova_palavra, *p, *pNew;
+  int n = palavra.length(), exchanges;
   char letra = 'e';
-  char vetor[n];
 
   p = &palavra;
+  pNew = &nova_palavra;
 
   cout << palavra << endl;
 
-  codificador(p, letra);
+  exchanges = codificador(p, pNew, n, letra);
  
-  cout << palavra;
+  cout << nova_palavra << endl;
+
+  cout << exchanges << endl;
   
 }
