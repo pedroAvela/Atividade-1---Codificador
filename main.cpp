@@ -33,8 +33,22 @@ int main() {
   int sizeofString, exchanges;
   char letter, new_letter, *p, *pNew;
 
+  cout << R"(
+       ____                __           ___                             __                    
+      /\  _`\             /\ \   __   /'___\  __                       /\ \                   
+      \ \ \/\_\    ___    \_\ \ /\_\ /\ \__/ /\_\     ___      __      \_\ \     ___    _ __  
+       \ \ \/_/_  / __`\  /'_` \\/\ \\ \ ,__\\/\ \   /'___\  /'__`\    /'_` \   / __`\ /\`'__\
+        \ \ \L\ \/\ \L\ \/\ \L\ \\ \ \\ \ \_/ \ \ \ /\ \__/ /\ \L\.\_ /\ \L\ \ /\ \L\ \\ \ \/ 
+         \ \____/\ \____/\ \___,_\\ \_\\ \_\   \ \_\\ \____\\ \__/.\_\\ \___,_\\ \____/ \ \_\ 
+          \/___/  \/___/  \/__,_ / \/_/ \/_/    \/_/ \/____/ \/__/\/_/ \/__,_ / \/___/   \/_/ by Pedro Avelar
+  )" << endl;
+
+  cout << "Codifique uma mensagem trocando seus caracteres!" << endl;
+  cout << "Mensagem a ser codificada: ";
   cin >> word;
+  cout << "Caracter que deseja substituir: ";
   cin >> letter;
+  cout << "Novo caracter: ";
   cin >> new_letter;
 
   sizeofString = word.length();
@@ -49,9 +63,9 @@ int main() {
   exchanges = codificador(p, pNew, sizeofString, letter, new_letter);
   new_word = string_runner(pNew, new_word, sizeofString, 1);
 
+  cout << "\033[2J\033[1;1H";
   cout << new_word << endl;
   cout << word << endl;
   cout << exchanges << endl;
-
   
 }
