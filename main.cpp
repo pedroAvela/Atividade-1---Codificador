@@ -29,9 +29,10 @@ int codificador(char *word, char *new_word, int word_length, char letter, char n
 }
 
 int main() {
-  string word, new_word;
+  string word;
   int sizeofString, exchanges;
-  char letter, new_letter, *p, *pNew;
+  char letter, new_letter, *p, *pNew, controle;
+  bool is_running = true;
 
   cout << R"(
        ____                __           ___                             __                    
@@ -44,28 +45,44 @@ int main() {
   )" << endl;
 
   cout << "Codifique uma mensagem trocando seus caracteres!" << endl;
-  cout << "Mensagem a ser codificada: ";
-  cin >> word;
-  cout << "Caracter que deseja substituir: ";
-  cin >> letter;
-  cout << "Novo caracter: ";
-  cin >> new_letter;
+  while (is_running){
+    string new_word;
 
-  sizeofString = word.length();
+    cout << "Mensagem a ser codificada: ";
+    cin >> word;
+    cout << "Caracter que deseja substituir: ";
+    cin >> letter;
+    cout << "Novo caracter: ";
+    cin >> new_letter;
 
-  char vetor_word[sizeofString], vetor_newWord[sizeofString];
+    if ((letter == 0) || (new_letter == 0)){
+      cout << "\033[2J\033[1;1H";
+      cout << "Caracter inválido, tente de novo" << endl;
+      continue;
+    }
 
-  p = &vetor_word[0];
-  pNew = &vetor_newWord[0];
+    sizeofString = word.length();
 
-  string_runner(p, word, sizeofString, 0);
+    char vetor_word[sizeofString], vetor_newWord[sizeofString];
 
-  exchanges = codificador(p, pNew, sizeofString, letter, new_letter);
-  new_word = string_runner(pNew, new_word, sizeofString, 1);
+    p = &vetor_word[0];
+    pNew = &vetor_newWord[0];
 
-  cout << "\033[2J\033[1;1H";
-  cout << new_word << endl;
-  cout << word << endl;
-  cout << exchanges << endl;
+    string_runner(p, word, sizeofString, 0);
+
+    exchanges = codificador(p, pNew, sizeofString, letter, new_letter);
+    new_word = string_runner(pNew, new_word, sizeofString, 1);
+
+    cout << "\033[2J\033[1;1H";
+    cout << "Nova mensagem: " << new_word << endl;
+    cout << "Mensagem antiga: " << word << endl;
+    cout << "Numero de trocas: " << exchanges << endl;
+    cout << "\nDeseja codificar outra mensagem? Digite 'y' para continuar, ou 'n' para sair do mesmo" << endl;
+    cin >> controle;
+    if (controle == 'n'){
+      is_running = false;
+    }
+    cout << "\033[2J\033[1;1H";
+  }
   
 }
